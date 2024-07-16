@@ -2,6 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 const Login = () => {
   const navigate = useNavigate();
+  const submit = () => {
+    navigate('/dash')
+  }
   return (
 
     <>
@@ -104,7 +107,7 @@ const Login = () => {
             <div class="mt-4 text-sm text-gray-600 text-center">
               <p>or with email</p>
             </div>
-            <form method="POST" class="space-y-4">
+            <form method="POST" onSubmit={submit} class="space-y-4">
 
               <div>
                 <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
@@ -119,7 +122,7 @@ const Login = () => {
                 <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300" />
               </div>
               <div>
-                <button onClick={navigate('/dash')} type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">Login</button>
+                <button type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">Login</button>
               </div>
             </form>
             <div class="mt-4 text-sm text-gray-600 text-center">
