@@ -16,7 +16,7 @@ function App() {
         <Inputform />
         <Gallery /> */}
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/*" element={<Layout />}>
             <Route path="dash" element={<Dashboard />} />
 
