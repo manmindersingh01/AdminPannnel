@@ -1,21 +1,31 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Button } from "@material-tailwind/react";
-import { NavbarDefault } from './components/NavbarDefault';
-import Hero from './components/Hero';
-import CardInput from './components/CardInput';
-import Inputform from './components/Inputform';
-import { Gallery } from './components/Gallery';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard';
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <NavbarDefault />
-      <Inputform />
-      <Gallery />
+      <BrowserRouter>
+
+
+        {/* <NavbarDefault />
+        <Inputform />
+        <Gallery /> */}
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/*" element={<Layout />}>
+            <Route path="dash" element={<Dashboard />} />
+
+          </Route>
+
+
+        </Routes>
+      </BrowserRouter>
+
     </>
   )
 }
