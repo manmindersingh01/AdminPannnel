@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Card,
   Typography,
@@ -17,20 +17,19 @@ import {
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import { NavbarDefault } from './NavbarDefault';
-
+import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
-
-
-
 const Layout = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
-      <div className='mx-auto max-w-screen-xl  h-auto  grid grid-cols-4  '>
-        <div className=' col-span-4'>
+      <div className='mx-auto max-w-screen-xl h-auto grid grid-cols-4'>
+        <div className='col-span-4'>
           <NavbarDefault />
         </div>
-        <div className='mx-auto max-w-screen-xl  py-2 lg:px-2 lg:py-4 hidden lg:block row-span-3 '>
+        <div className='mx-auto max-w-screen-xl py-2 lg:px-2 lg:py-4 hidden lg:block row-span-3'>
           <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
             <div className="mb-2 p-4">
               <Typography variant="h5" color="blue-gray">
@@ -42,22 +41,28 @@ const Layout = () => {
                 <ListItemPrefix>
                   <PresentationChartBarIcon className="h-5 w-5" />
                 </ListItemPrefix>
-                Dashboard
+                <button onClick={() => navigate('/dash')}>Dashboard</button>
               </ListItem>
               <ListItem>
                 <ListItemPrefix>
                   <ShoppingBagIcon className="h-5 w-5" />
                 </ListItemPrefix>
-                E-Commerce
+                <button onClick={() => navigate('/frequentevents')}>Frequent events</button>
               </ListItem>
               <ListItem>
                 <ListItemPrefix>
                   <InboxIcon className="h-5 w-5" />
                 </ListItemPrefix>
-                Inbox
+                <button onClick={() => navigate('/events')}>Events</button>
                 <ListItemSuffix>
                   <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
                 </ListItemSuffix>
+              </ListItem>
+              <ListItem>
+                <ListItemPrefix>
+                  <UserCircleIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                <button onClick={() => navigate('/text')}>Headings</button>
               </ListItem>
               <ListItem>
                 <ListItemPrefix>
@@ -80,12 +85,12 @@ const Layout = () => {
             </List>
           </Card>
         </div>
-        <div className=' col-span-3 row-span-3 m-4'>
+        <div className='col-span-3 row-span-3 m-4'>
           <Outlet />
         </div>
-      </div>git
+      </div>
     </div>
   )
 }
 
-export default Layout 
+export default Layout;
