@@ -14,11 +14,11 @@ const Inputform = () => {
           <div className="w-72 m-4">
             <Input label="Title" />
           </div>
-          <div className="flex w-96 flex-col gap-6 m-4">
-            <Textarea size="md" label="Body" />
+          <div className="w-72 m-4">
+            <Input label="body" />
           </div>
-          <div className="flex w-96 flex-col gap-6 m-4">
-            <Textarea size="md" label="description" />
+          <div className="w-72 m-4">
+            <Input label="description" />
           </div>
           <div className=' flex items-center justify-between m-4'>
             <div className=' flex justify-center items-center'>
