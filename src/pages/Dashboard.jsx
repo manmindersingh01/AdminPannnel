@@ -4,7 +4,7 @@ import BarChart from '../components/BarChart'
 
 const Dashboard = () => {
   return (
-    <div className=' flex justify-center items-center w-full h-full g'>
+    <div className='flex-col justify-center items-center  gap-3 flex  md:flex md:justify-center md:items-center w-full h-full'>
       <div>
         <ReachGraph />
 

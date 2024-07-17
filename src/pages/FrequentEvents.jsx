@@ -3,8 +3,8 @@ import Inputform from '../components/Inputform'
 import Table from '../components/Table'
 const FrequentEvents = () => {
   return (
-    <div>
-      <div>
+    <div className=' w-full'>
+      <div className=''>
         <Inputform />
         <Table />
       </div>

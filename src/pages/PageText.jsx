@@ -10,7 +10,7 @@ import {
 const PageText = () => {
   return (
     <div className=' h-full w-full flex items-center justify-center pb-24'>
-      <Card color="transparent" shadow={false}>
+      <Card shadow={false} className=' '>
         <Typography variant="h4" color="blue-gray">
           Page text
         </Typography>

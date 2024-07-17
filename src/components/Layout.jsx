@@ -25,12 +25,12 @@ const Layout = () => {
 
   return (
     <div>
-      <div className='mx-auto max-w-screen-xl h-auto grid grid-cols-4'>
-        <div className='col-span-4'>
+      <div className="relative mx-auto max-w-screen-xl h-auto md:grid md:grid-cols-4 flex flex-col">
+        <div className="col-span-4  top-0 md:z-30 z-50 ">
           <NavbarDefault />
         </div>
-        <div className='mx-auto max-w-screen-xl py-2 lg:px-2 lg:py-4 hidden lg:block row-span-3'>
-          <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+        <div className="col-span-1 py-2 lg:px-2 lg:py-4 hidden lg:block row-span-3 md:z-40 ">
+          <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-white">
             <div className="mb-2 p-4">
               <Typography variant="h5" color="blue-gray">
                 Sidebar
@@ -85,7 +85,7 @@ const Layout = () => {
             </List>
           </Card>
         </div>
-        <div className='col-span-3 row-span-3 m-4'>
+        <div className="col-span-3 row-span-3 md:z-50 z-10">
           <Outlet />
         </div>
       </div>

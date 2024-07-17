@@ -17,6 +17,9 @@ const Inputform = () => {
           <div className="flex w-96 flex-col gap-6 m-4">
             <Textarea size="md" label="Body" />
           </div>
+          <div className="flex w-96 flex-col gap-6 m-4">
+            <Textarea size="md" label="description" />
+          </div>
           <div className=' flex items-center justify-between m-4'>
             <div className=' flex justify-center items-center'>
               <span>frequent event</span>
