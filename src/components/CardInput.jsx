@@ -1,13 +1,25 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const CardInput = () => {
+  const [image, setImage] = useState(null);
+
   const onDrop = useCallback(acceptedFiles => {
-    // Handle file upload
-    console.log(acceptedFiles);
+    const file = acceptedFiles[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const removeImage = () => {
+    setImage(null);
+  };
 
   return (
     <div
@@ -16,30 +28,67 @@ const CardInput = () => {
     >
       <input {...getInputProps()} />
       <div className='w-full flex justify-center items-center h-32'>
-        {isDragActive ? (
-          <p className='text-gray-500 text-center font-thin tracking-wide'>Drop the files here ...</p>
+        {image ? (
+          <div className='relative'>
+            <img src={image} alt="Uploaded Preview" className='w-full h-32 object-cover rounded-xl' />
+            <button
+              onClick={removeImage}
+              className='absolute top-0 right-0 mt-2 mr-2 text-red-600'
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
         ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-            />
-          </svg>
+          <div className='flex flex-col items-center'>
+            {isDragActive ? (
+              <p className='text-gray-500 text-center font-thin tracking-wide'>Drop the files here ...</p>
+            ) : (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-12 h-12 mb-2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                  />
+                </svg>
+                <p className='text-gray-500 text-center font-thin tracking-wide'>
+                  You can add image or drag and drop it here
+                </p>
+              </>
+            )}
+          </div>
         )}
       </div>
-      <div>
-        <p className='text-gray-500 text-center font-thin tracking-wide'>
-          You can add image or drag and drop it here
-        </p>
-      </div>
+      {image && (
+        <div className='mt-4 flex justify-center'>
+          <button
+            onClick={removeImage}
+            className='px-4 py-2 bg-red-500 text-white rounded-xl'
+          >
+            Remove Image
+          </button>
+        </div>
+      )}
     </div>
   );
 };

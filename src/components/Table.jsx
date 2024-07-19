@@ -1,32 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { Card, Typography } from "@material-tailwind/react";
-const TABLE_HEAD = ["Name", "Job", "date", ""];
+import { DropdownButton } from './DropdownButton';
+const TABLE_HEAD = ["Title", "Body", "Description", "Edit"];
 const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
+  { title: "Title 1", body: "Body 1", description: "Description 1" },
+  { title: "Title 2", body: "Body 2", description: "Description 2" },
+  { title: "Title 3", body: "Body 3", description: "Description 3" },
+  { title: "Title 4", body: "Body 4", description: "Description 4" },
+  { title: "Title 5", body: "Body 5", description: "Description 5" },
 ];
 
 const Table = () => {
@@ -49,26 +30,26 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, job, date }, index) => (
-            <tr key={name} className="even:bg-blue-gray-50/50">
+          {TABLE_ROWS.map(({ title, body, description }, index) => (
+            <tr key={index} className="even:bg-blue-gray-50/50">
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-normal">
-                  {name}
+                  {title}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-normal">
-                  {job}
+                  {body}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-normal">
-                  {date}
+                  {description}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                  Edit
+                  {<DropdownButton name="edit" item1="modify" item2="delete" />}
                 </Typography>
               </td>
             </tr>
@@ -76,7 +57,7 @@ const Table = () => {
         </tbody>
       </table>
     </Card>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

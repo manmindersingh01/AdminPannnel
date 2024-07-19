@@ -89,68 +89,72 @@ export function NavbarDefault() {
         </IconButton>
       </div>
       <div className="">
-        <MobileNav open={openNav}>
-          <div className="container mx-auto absolute z-20   ">
-            <div className="flex items-center gap-x-1">
-              <div className="bg-white bg-opacity-100">
-                <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-white">
-                  <div className="mb-2 p-4">
-                    <Typography variant="h5" color="blue-gray">
-                      Sidebar
-                    </Typography>
-                  </div>
-                  <List>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <PresentationChartBarIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      <button onClick={() => navigate('/dash')}>Dashboard</button>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <ShoppingBagIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      <button onClick={() => navigate('/frequentevents')}>Frequent events</button>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <InboxIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      <button onClick={() => navigate('/events')}>Events</button>
-                      <ListItemSuffix>
-                        <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-                      </ListItemSuffix>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <UserCircleIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      <button onClick={() => navigate('/text')}>Headings</button>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <UserCircleIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      Profile
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <Cog6ToothIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      Settings
-                    </ListItem>
-                    <ListItem>
-                      <ListItemPrefix>
-                        <PowerIcon className="h-5 w-5" />
-                      </ListItemPrefix>
-                      Log Out
-                    </ListItem>
-                  </List>
-                </Card>
+        {openNav ? <div>
+
+          <MobileNav open={openNav}>
+            <div className="container mx-auto absolute z-20   ">
+              <div className="flex items-center gap-x-1">
+                <div className="bg-white bg-opacity-100">
+                  <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-white">
+                    <div className="mb-2 p-4">
+                      <Typography variant="h5" color="blue-gray">
+                        Sidebar
+                      </Typography>
+                    </div>
+                    <List>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <PresentationChartBarIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        <button onClick={() => navigate('/dash')}>Dashboard</button>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <ShoppingBagIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        <button onClick={() => navigate('/frequentevents')}>Frequent events</button>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <InboxIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        <button onClick={() => navigate('/events')}>Events</button>
+                        <ListItemSuffix>
+                          <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+                        </ListItemSuffix>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <UserCircleIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        <button onClick={() => navigate('/text')}>Headings</button>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <UserCircleIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Profile
+                      </ListItem>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <Cog6ToothIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Settings
+                      </ListItem>
+                      <ListItem>
+                        <ListItemPrefix>
+                          <PowerIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Log Out
+                      </ListItem>
+                    </List>
+                  </Card>
+                </div>
               </div>
             </div>
-          </div>
-        </MobileNav>
+          </MobileNav>
+        </div> : <div></div>}
+
       </div>
 
     </Navbar>

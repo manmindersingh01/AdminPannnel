@@ -10,87 +10,29 @@ import {
 const PageText = () => {
   return (
     <div className=' h-full w-full flex items-center justify-center pb-24'>
-      <Card shadow={false} className=' '>
-        <Typography variant="h4" color="blue-gray">
-          Page text
-        </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
-          here you can add and modify all the different sections of a page
-        </Typography>
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-          <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              heading-1
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="xyz"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              heading-2
-            </Typography>
-            <Input
-              size="lg"
-              placeholder="xyz"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              heading-3
-            </Typography>
-            <Input
-              type="text"
-              size="lg"
-              placeholder="xyz"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              heading-4
-            </Typography>
-            <Input
-              type="text"
-              size="lg"
-              placeholder="xyz"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              heading-5
-            </Typography>
-            <Input
-              type="text"
-              size="lg"
-              placeholder="xyz"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
+      <div className='w-full h-full mt-10'>
+        <span className='border border-black p-2 rounded-lg text-xl'>Here you can edit text of all you page</span>
+        <form >
+
+          <div className=' grid grid-cols-2 m-5 mt-10 gap-4'>
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="headings" />
+            <Input variant="outlined" label="headings" placeholder="Outlined" />
           </div>
-
-
-          <Button className="mt-6" fullWidth>
-            sign up
-          </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <a href="#" className="font-medium text-gray-900">
-              Sign In
-            </a>
-          </Typography>
+          <div className='flex justify-end mx-6'>
+            <Button variant="gradient">submit</Button>
+          </div>
         </form>
-      </Card>
+      </div>
     </div>
   )
 }
