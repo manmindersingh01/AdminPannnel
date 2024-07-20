@@ -97,7 +97,7 @@ const Login = () => {
 
       <div className="flex items-center justify-center flex-1 bg-gray-100">
         <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-center">Login</h2>
+          <h2 className="text-2xl font-bold text-center">login</h2>
           <form onSubmit={submit} className="mt-4">
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
