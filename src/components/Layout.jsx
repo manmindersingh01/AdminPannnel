@@ -34,10 +34,10 @@ const Layout = ({ isAuthenticated }) => {
     }
   };
 
-  if (!isAuthenticated) {
-    // Redirect or show a message if not authenticated
-    return <p>You need to be logged in to view this content.</p>;
-  }
+  // if (!isAuthenticated) {
+  //   // Redirect or show a message if not authenticated
+  //   return <p>You need to be logged in to view this content.</p>;
+  // }
 
   return (
     <div>
