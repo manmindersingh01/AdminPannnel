@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-
+import { Spinner } from "@material-tailwind/react";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       if (res) {
-        navigate('/dash');
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error('Error creating user:', error);
@@ -129,9 +131,9 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-900"
+              className="w-full flex justify-center items-center bg-black text-white py-2 px-4 rounded-md hover:bg-gray-900"
             >
-              LOGIN
+              {!loading ? <p>LOGIN</p> : <Spinner />}
             </button>
           </form>
         </div>

@@ -19,19 +19,26 @@ import {
 import { NavbarDefault } from './NavbarDefault';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { signOut } from "firebase/auth"
-import { auth } from "../config/firebase"
-const Layout = () => {
+import { signOut } from "firebase/auth";
+import { auth } from "../config/firebase";
+
+const Layout = ({ isAuthenticated }) => {
   const navigate = useNavigate();
+
   const handleSignOut = async () => {
-    const res = await signOut(auth)
-    if (res) {
-      navigate('/')
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error("Error signing out:", error);
     }
-    else {
-      console.log("error");
-    }
+  };
+
+  if (!isAuthenticated) {
+    // Redirect or show a message if not authenticated
+    return <p>You need to be logged in to view this content.</p>;
   }
+
   return (
     <div>
       <div className="relative mx-auto max-w-screen-xl h-auto md:grid md:grid-cols-4 flex flex-col">
@@ -46,7 +53,7 @@ const Layout = () => {
               </Typography>
             </div>
             <List>
-              <button onClick={() => navigate('/dash')}>
+              <button onClick={() => navigate('/dashboard')}>
                 <ListItem>
                   <ListItemPrefix>
                     <PresentationChartBarIcon className="h-5 w-5" />
@@ -73,7 +80,7 @@ const Layout = () => {
                   </ListItemSuffix>
                 </ListItem>
               </button>
-              <button onClick={() => navigate('/text')}>
+              <button onClick={() => navigate('/pagetext')}>
                 <ListItem>
                   <ListItemPrefix>
                     <UserCircleIcon className="h-5 w-5" />
@@ -109,7 +116,7 @@ const Layout = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Layout;

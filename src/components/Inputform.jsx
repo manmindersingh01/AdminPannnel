@@ -4,6 +4,7 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Spinner
 } from "@material-tailwind/react";
 import CardInput from './CardInput';
 import { app } from "../config/firebase";
@@ -17,6 +18,7 @@ const Inputform = ({ setProducts, includeFrequent }) => {
   const [description, setDescription] = useState('');
   const [frequent, setFrequent] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const firestore = getFirestore(app);
   const storage = getStorage(app);
@@ -28,6 +30,7 @@ const Inputform = ({ setProducts, includeFrequent }) => {
 
   const submitData = async (e) => {
     e.preventDefault();
+    setLoading(true);
     let imageUrl = '';
     if (imageFile) {
       const imageRef = ref(storage, `images/${imageFile.name}`);
@@ -90,7 +93,7 @@ const Inputform = ({ setProducts, includeFrequent }) => {
                   </div>
                 )} */}
                 <div className='flex items-center justify-between m-4'>
-                  <Button type="submit" className='' variant="filled">Add Event</Button>
+                  <Button type="submit" className=' flex items-center justify-center' variant="filled" >{loading ? <Spinner /> : <p>Add Event</p>}</Button>
                 </div>
               </div>
             </form>
