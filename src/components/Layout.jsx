@@ -19,10 +19,19 @@ import {
 import { NavbarDefault } from './NavbarDefault';
 import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-
+import { signOut } from "firebase/auth"
+import { auth } from "../config/firebase"
 const Layout = () => {
   const navigate = useNavigate();
-
+  const handleSignOut = async () => {
+    const res = await signOut(auth)
+    if (res) {
+      navigate('/')
+    }
+    else {
+      console.log("error");
+    }
+  }
   return (
     <div>
       <div className="relative mx-auto max-w-screen-xl h-auto md:grid md:grid-cols-4 flex flex-col">
@@ -50,7 +59,7 @@ const Layout = () => {
                   <ListItemPrefix>
                     <ShoppingBagIcon className="h-5 w-5" />
                   </ListItemPrefix>
-                  Frequent events
+                  Frequent Products
                 </ListItem>
               </button>
               <button onClick={() => navigate('/events')}>
@@ -58,7 +67,7 @@ const Layout = () => {
                   <ListItemPrefix>
                     <InboxIcon className="h-5 w-5" />
                   </ListItemPrefix>
-                  Events
+                  Products
                   <ListItemSuffix>
                     <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
                   </ListItemSuffix>
@@ -84,12 +93,14 @@ const Layout = () => {
                 </ListItemPrefix>
                 Settings
               </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <PowerIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Log Out
-              </ListItem>
+              <button onClick={handleSignOut}>
+                <ListItem>
+                  <ListItemPrefix>
+                    <PowerIcon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  Log Out
+                </ListItem>
+              </button>
             </List>
           </Card>
         </div>

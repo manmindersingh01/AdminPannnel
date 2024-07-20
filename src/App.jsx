@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import FrequentEvents from './pages/FrequentEvents';
 import Events from './pages/Events';
 import PageText from './pages/PageText';
+
 function App() {
   const [count, setCount] = useState(0)
 

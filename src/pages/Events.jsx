@@ -1,21 +1,42 @@
 import Inputform from '../components/Inputform'
 import Table from '../components/Table'
 import { Button } from "@material-tailwind/react";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { app } from "../config/firebase"
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+
+
+
 
 const Events = () => {
+  const firestore = getFirestore(app);
   const [products, setProducts] = useState(false)
+  const [eventsData, setEventsData] = useState([]);
+
+  const fetchEvents = async () => {
+    const coll = collection(firestore, "product");
+    const eventsQuery = query(coll, where('data.frequent', "==", false));
+    const eventsSnapshot = await getDocs(eventsQuery);
+    const eventsList = eventsSnapshot.docs.map(doc => doc.data());
+    //console.log(eventsList);
+    setEventsData(eventsList);
+    //console.log(eventsData);
+  }
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <div className="relative">
       {products && (
         <div className="absolute top-0 left-0 w-full bg-white p-4 z-10 shadow-lg">
-          <Inputform setProducts={setProducts} />
+          <Inputform setProducts={setProducts} includeFrequent={false} />
         </div>
       )}
       <div className='w-full h-10 mt-10 px-4 flex  items-center justify-between mb-4'>
         <div>
-          <span className=' w-40 border border-black p-2 rounded-md md:font-bold md:tracking-wide text-sm'>Here you can add your products</span>
+          <span className=' w-40   p-2 rounded-md text-gray-700  md:tracking-wide text-xl underline underline-offset-8 '>Here you can add your products</span>
         </div>
         <Button
           onClick={() => setProducts(true)}
@@ -39,7 +60,7 @@ const Events = () => {
           </svg>
         </Button>
       </div>
-      <Table />
+      <Table eventsData={eventsData} />
     </div>
   )
 }

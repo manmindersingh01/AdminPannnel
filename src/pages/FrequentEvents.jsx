@@ -1,20 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Inputform from '../components/Inputform'
 import Table from '../components/Table'
 import { Button } from "@material-tailwind/react"
+import { collection, query, getDocs, where, getFirestore } from "firebase/firestore"
+import { app } from "../config/firebase"
+
+const firestore = getFirestore(app);
+
+
 const FrequentEvents = () => {
   const [products, setProducts] = useState(false)
+  const [eventsData, setEventsData] = useState([]);
+  const fetchEvents = async () => {
+    // fetch frequent events logic here
+    const coll = collection(firestore, "product");
+    const eventsQuery = query(coll, where('data.frequent', "==", true));
+    const eventsSnapshot = await getDocs(eventsQuery);
+    const eventsList = eventsSnapshot.docs.map(doc => doc.data());
+    setEventsData(eventsList)
+    console.log("frequent", eventsList);
+  }
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
   return (
     <div className=' w-full'>
       <div className=' relative'>
         {products && (
           <div className="absolute top-0 left-0 w-full bg-white p-4 z-10 shadow-lg">
-            <Inputform setProducts={setProducts} />
+            <Inputform setProducts={setProducts} includeFrequent={true} />
           </div>
         )}
         <div className='w-full h-10 mt-10 px-4 flex justify-between items-center mb-4'>
           <div>
-            <span className=' border border-black p-2 rounded-md font-bold tracking-wide'>Here you can add your frequent products</span>
+            <span className=' w-40   p-2 rounded-md text-gray-700  md:tracking-wide text-xl underline underline-offset-8 '>Here you can add your frequent products</span>
           </div>
           <Button
             onClick={() => setProducts(true)}
@@ -39,7 +59,7 @@ const FrequentEvents = () => {
           </Button>
         </div>
 
-        <Table />
+        <Table eventsData={eventsData} />
       </div>
     </div>
   )
