@@ -8,6 +8,7 @@ import FrequentEvents from './pages/FrequentEvents';
 import Layout from './components/Layout';
 import { auth } from './config/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+import { DefaultSkeleton } from './components/DefaultSkeleton';
 
 // Define the authentication state hook
 const useAuth = () => {
@@ -40,19 +41,19 @@ const AppRouter = () => {
       children: [
         {
           path: '/dashboard',
-          element: isAuthenticated ? <Dashboard /> : <Login />,
+          element: isAuthenticated ? <Dashboard /> : <DefaultSkeleton />,
         },
         {
           path: '/events',
-          element: isAuthenticated ? <Events /> : <Login />,
+          element: isAuthenticated ? <Events /> : <DefaultSkeleton />,
         },
         {
           path: '/pagetext',
-          element: isAuthenticated ? <PageText /> : <Login />,
+          element: isAuthenticated ? <PageText /> : <DefaultSkeleton />,
         },
         {
           path: '/frequentevents',
-          element: isAuthenticated ? <FrequentEvents /> : <Login />,
+          element: isAuthenticated ? <FrequentEvents /> : <DefaultSkeleton />,
         },
       ],
     },
