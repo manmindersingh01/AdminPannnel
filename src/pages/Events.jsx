@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 import React, { useState, useEffect } from 'react'
 import { app } from "../config/firebase"
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
-
+import { Checkbox } from "@material-tailwind/react";
 
 
 
@@ -17,15 +17,21 @@ const Events = () => {
     const coll = collection(firestore, "product");
     const eventsQuery = query(coll, where('data.frequent', "==", false));
     const eventsSnapshot = await getDocs(eventsQuery);
-    const eventsList = eventsSnapshot.docs.map(doc => doc.data());
+    const eventsList = eventsSnapshot.docs.map(doc => (
+      {
+        ...doc.data(), id: doc.id
+      }
+    ));
     //console.log(eventsList);
     setEventsData(eventsList);
-    //console.log(eventsData);
+    // console.log('heellooo', eventsList);
+    //eventsData.map((val) => console.log("here is", val))
+
   }
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [eventsData]);
 
   return (
     <div className="relative">
@@ -36,7 +42,8 @@ const Events = () => {
       )}
       <div className='w-full h-10 mt-10 px-4 flex  items-center justify-between mb-4'>
         <div>
-          <span className=' w-40   p-2 rounded-md text-gray-700  md:tracking-wide text-xl underline underline-offset-8 '>Here you can add your products</span>
+          <span className=' w-40 font-bold   p-2 rounded-md text-gray-700  md:tracking-wide text-xl '>Products</span>
+          <p className=' text-sm text-gray-600'>Here is the list of all the products with their titile , body , description </p>
         </div>
         <Button
           onClick={() => setProducts(true)}
