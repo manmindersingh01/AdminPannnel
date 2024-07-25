@@ -3,6 +3,7 @@ import { Card, Typography } from "@material-tailwind/react";
 import { doc, deleteDoc, getFirestore } from "firebase/firestore";
 import { app } from '../config/firebase';
 import Inputform from './Inputform';
+import DeleteModel from './DeleteModel';
 
 const TABLE_HEAD = ["Title", "Body", "Description", "Discount", "Edit"];
 
@@ -11,19 +12,24 @@ const truncateText = (text, wordLimit) => {
   return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : text;
 };
 
-
-
-
 const Table = ({ eventsData, setEventData }) => {
   const [edit, setEdit] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const firestore = getFirestore(app);
+  const [delModel, setDelModel] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
-  const handleDelete = async (id) => {
+  const handleDelete = (id) => {
+    setDeleteId(id);
+    setDelModel(true);
+  };
+
+  const confirmDelete = async () => {
     try {
-      const ref = doc(firestore, "product", id);
+      const ref = doc(firestore, "product", deleteId);
       await deleteDoc(ref);
-      setEventData(eventsData.filter((data) => data.id !== id));
+      setEventData(eventsData.filter((data) => data.id !== deleteId));
+      setDelModel(false);
     } catch (error) {
       console.error("Error deleting document:", error);
     }
@@ -51,7 +57,13 @@ const Table = ({ eventsData, setEventData }) => {
           }}
         />
       )}
-
+      {delModel && (
+        <DeleteModel
+          delModel={delModel}
+          setDelModel={setDelModel}
+          confirmDelete={confirmDelete}
+        />
+      )}
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>

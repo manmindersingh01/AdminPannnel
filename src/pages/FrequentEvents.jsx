@@ -25,7 +25,7 @@ const FrequentEvents = () => {
   }
   useEffect(() => {
     fetchEvents();
-  }, [eventsData]);
+  }, []);
 
   return (
     <div className=' w-full'>
