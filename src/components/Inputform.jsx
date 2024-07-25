@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Input, Button, Checkbox, Dialog,
-  Spinner
-} from "@material-tailwind/react";
+import { Input, Button, Checkbox, Dialog, Spinner } from "@material-tailwind/react";
 import CardInput from './CardInput';
 import { app } from "../config/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -18,6 +15,7 @@ const Inputform = ({ setProducts, initialData, includeFrequent, onClose, onUpdat
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(initialData ? initialData.data.imageUrl : '');
   const [percentageOff, setPercentageOff] = useState(initialData ? initialData.data.percentageOff : "0");
+  const [imagePreview, setImagePreview] = useState(initialData ? initialData.data.imageUrl : '');
 
   const firestore = getFirestore(app);
   const storage = getStorage(app);
@@ -30,8 +28,21 @@ const Inputform = ({ setProducts, initialData, includeFrequent, onClose, onUpdat
       setFrequent(initialData.data.frequent);
       setImageUrl(initialData.data.imageUrl);
       setPercentageOff(initialData.data.percentageOff);
+      setImagePreview(initialData.data.imageUrl);
     }
   }, [initialData]);
+
+  useEffect(() => {
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      setImagePreview(initialData ? initialData.data.imageUrl : '');
+    }
+  }, [imageFile, initialData]);
 
   const handleClose = () => {
     setOpen(false);
@@ -89,7 +100,7 @@ const Inputform = ({ setProducts, initialData, includeFrequent, onClose, onUpdat
       {open && (
         <div className="mx-auto max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4 h-auto border border-gray-300 shadow-sm rounded-xl mt-10">
           <div>
-            <button onClick={handleClose}>
+            <button onClick={handleClose} aria-label="Close">
               <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
               </svg>
@@ -97,30 +108,30 @@ const Inputform = ({ setProducts, initialData, includeFrequent, onClose, onUpdat
           </div>
           <form onSubmit={submitData} className='flex-col md:flex md:flex-row justify-center md:items-center md:justify-center items-center'>
             <div className='pb-28'>
-              <CardInput onImageSelect={setImageFile} initialImage={initialData ? initialData.data.imageUrl : ''} />
+              <CardInput onImageSelect={setImageFile} initialImage={imagePreview} />
             </div>
 
             <div className='md:flex md:flex-col gap-2 m-2 flex flex-col items-center'>
               <div className="w-72">
-                <Input label="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <Input label="Title" required value={title} onChange={(e) => setTitle(e.target.value)} />
               </div>
               <div className="w-72">
-                <Input label="Body" value={body} onChange={(e) => setBody(e.target.value)} />
+                <Input label="Body" required value={body} onChange={(e) => setBody(e.target.value)} />
               </div>
               <div className="w-72">
-                <Input label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                <Input label="Description" required value={description} onChange={(e) => setDescription(e.target.value)} />
               </div>
 
               <div className="w-72">
-                <Input label="Percentage Off" value={percentageOff} onChange={(e) => setPercentageOff(e.target.value)} />
+                <Input label="Discount" type='number' className=' ring-0 hover:ring-0' value={percentageOff} onChange={(e) => setPercentageOff(e.target.value)} />
               </div>
               <div className="w-72">
                 <Checkbox label="Frequent Product" checked={frequent} onChange={(e) => setFrequent(e.target.checked)} />
               </div>
 
-              <div className='flex items-center justify-between m-4'>
-                <Button type="submit" className='flex items-center justify-center' variant="filled">
-                  {loading ? <Spinner /> : <p>{initialData ? 'Update Event' : 'Add Event'}</p>}
+              <div className='flex items-center justify-between m-4 '>
+                <Button type="submit" className='flex items-center justify-center w-36' variant="filled">
+                  {loading ? <Spinner /> : <p>{initialData ? 'Update' : 'Add'}</p>}
                 </Button>
               </div>
             </div>

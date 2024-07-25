@@ -5,13 +5,13 @@ import { getAuth } from "firebase/auth";
 
 // Use environment variables for Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
+  apiKey: "AIzaSyDGEMzq4Vbkq0M4kcPOGqDvoeTVdDn66Cs",
+  authDomain: "amin-6deda.firebaseapp.com",
+  projectId: "amin-6deda",
+  storageBucket: "amin-6deda.appspot.com",
+  messagingSenderId: "793149885090",
+  appId: "1:793149885090:web:c6c158c1a6965d5d4e65fb",
+  measurementId: "G-MXEBPMXEZ8"
 };
 
 // Initialize Firebase

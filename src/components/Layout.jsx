@@ -61,14 +61,14 @@ const Layout = ({ isAuthenticated }) => {
                   Dashboard
                 </ListItem>
               </button>
-              <button onClick={() => navigate('/frequentevents')}>
+              {/* <button onClick={() => navigate('/frequentevents')}>
                 <ListItem>
                   <ListItemPrefix>
                     <ShoppingBagIcon className="h-5 w-5" />
                   </ListItemPrefix>
                   Frequent Products
                 </ListItem>
-              </button>
+              </button> */}
               <button onClick={() => navigate('/events')}>
                 <ListItem>
                   <ListItemPrefix>
@@ -76,30 +76,30 @@ const Layout = ({ isAuthenticated }) => {
                   </ListItemPrefix>
                   Products
                   <ListItemSuffix>
-                    <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+                    {/* <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" /> */}
                   </ListItemSuffix>
                 </ListItem>
               </button>
-              <button onClick={() => navigate('/pagetext')}>
+              {/* <button onClick={() => navigate('/pagetext')}>
                 <ListItem>
                   <ListItemPrefix>
                     <UserCircleIcon className="h-5 w-5" />
                   </ListItemPrefix>
                   Headings
                 </ListItem>
-              </button>
+              </button> */}
               <ListItem>
                 <ListItemPrefix>
                   <UserCircleIcon className="h-5 w-5" />
                 </ListItemPrefix>
                 Profile
               </ListItem>
-              <ListItem>
+              {/* <ListItem>
                 <ListItemPrefix>
                   <Cog6ToothIcon className="h-5 w-5" />
                 </ListItemPrefix>
                 Settings
-              </ListItem>
+              </ListItem> */}
               <button onClick={handleSignOut}>
                 <ListItem>
                   <ListItemPrefix>

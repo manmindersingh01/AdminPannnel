@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { button, Card, Typography } from "@material-tailwind/react";
-import { DropdownButton } from './DropdownButton';
-import { doc, deleteDoc, getFirestore, updateDoc } from "firebase/firestore";
+import React, { useState } from 'react';
+import { Card, Typography } from "@material-tailwind/react";
+import { doc, deleteDoc, getFirestore } from "firebase/firestore";
 import { app } from '../config/firebase';
-import { Button } from 'flowbite-react';
 import Inputform from './Inputform';
 
-const TABLE_HEAD = ["Title", "Body", "Description", "%off", "Edit"];
+const TABLE_HEAD = ["Title", "Body", "Description", "Discount", "Edit"];
+
+const truncateText = (text, wordLimit) => {
+  const words = text.split(' ');
+  return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : text;
+};
+
+
+
 
 const Table = ({ eventsData, setEventData }) => {
   const [edit, setEdit] = useState(false);
@@ -65,24 +71,24 @@ const Table = ({ eventsData, setEventData }) => {
         <tbody>
           {eventsData.map((data, index) => (
             <tr key={index} className="even:bg-blue-gray-50/50">
-              <td className="p-4">
+              <td className="p-4 capitalize">
                 <Typography variant="small" color="blue-gray" className="font-normal">
                   {data.data.title || 'N/A'}
                 </Typography>
               </td>
-              <td className="p-4">
+              <td className="p-4 capitalize">
                 <Typography variant="small" color="blue-gray" className="font-normal">
-                  {data.data.body || 'N/A'}
+                  {truncateText(data.data.body || 'N/A', 3)}
+                </Typography>
+              </td>
+              <td className="p-4 capitalize">
+                <Typography variant="small" color="blue-gray" className="font-normal">
+                  {truncateText(data.data.description || 'N/A', 3)}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-normal">
-                  {data.data.description || 'N/A'}
-                </Typography>
-              </td>
-              <td className="p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                  {data.data.percentageOff || 'N/A'}
+                  {data.data.percentageOff || '0'}%
                 </Typography>
               </td>
               <td className="p-4">
